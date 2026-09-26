@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Film, House, Compass, Heart, Search, Moon, Sun} from "lucide-react";
 import MobileMenu from "@/components/layout/MobileMenu";
 import NavLink from "@/components/layout/NavLink";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 export default function Header(){
 
@@ -55,10 +56,7 @@ export default function Header(){
                 </nav>
 
                 <div className="flex gap-4">
-                    <button className="p-2 rounded-full text-muted hover:bg-surface-hover hover:text-accent transition-colors duration-200">
-                            <Moon size={25} />
-                    </button>
-
+                    <ThemeToggle/>
                     <MobileMenu />
                 </div>
             </div>
