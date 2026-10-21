@@ -15,7 +15,8 @@ export default function MovieCard({ movie }: {movie: Movie}){
         ? new Date(movie.release_date).getFullYear()
         : null ;
 
-    const {toggleMovie, isInWatchlist} = useWatchlistStore();
+    const {toggleMovie, isInWatchlist, hasHydrated} = useWatchlistStore();
+    const isSaved = hasHydrated && isInWatchlist(movie.id);
 
 
     return(
@@ -61,7 +62,7 @@ export default function MovieCard({ movie }: {movie: Movie}){
                         hover:scale-110 hover:bg-background hover:border-accent
                         opacity-100 lg:opacity-0 lg:group-hover:opacity-100
                     "
-                    aria-label={isInWatchlist(movie.id) ? "Remove from watchlist" : "Add to watchlist"}
+                    aria-label={isSaved ? "Remove from watchlist" : "Add to watchlist"}
                     onClick={(e) => {
                         e.preventDefault();
                         toggleMovie(movie);
@@ -70,7 +71,7 @@ export default function MovieCard({ movie }: {movie: Movie}){
                     <Heart 
                         size={20} 
                         className={`transition-colors ${
-                            isInWatchlist(movie.id) 
+                            isSaved
                                 ? "text-accent fill-accent" 
                                 : "text-foreground hover:text-accent"
                         }`}

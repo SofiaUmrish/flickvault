@@ -16,9 +16,9 @@ export default function MovieHero({ movie }: {movie: Movie}){
         ? new Date(movie.release_date).getFullYear()
         : null ;
 
-    const { toggleMovie, isInWatchlist } = useWatchlistStore();
-
-    const isSaved = isInWatchlist(movie.id);
+    const {toggleMovie, isInWatchlist, hasHydrated} = useWatchlistStore();
+          
+    const isSaved = hasHydrated && isInWatchlist(movie.id);
     
     return(
 

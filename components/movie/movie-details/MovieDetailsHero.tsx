@@ -4,7 +4,8 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import {MovieDetails} from "@/lib/tmdb/types"
-import { Play, Film, Star } from "lucide-react";
+import { Play, Film, Star, Check, Plus } from "lucide-react";
+import { useWatchlistStore } from "@/store/watchlist";
 
 interface MovieDetailsHeroProps {
     movie: MovieDetails;
@@ -20,6 +21,25 @@ export default function MovieDetailsHero({ movie,
     posterUrl,
     releaseYear,
     hasTrailer }: MovieDetailsHeroProps){
+
+    const {toggleMovie, isInWatchlist, hasHydrated} = useWatchlistStore();
+    const isSaved = hasHydrated && isInWatchlist(movie.id);
+    
+    const handleWatchlistToggle = () => {
+        toggleMovie({
+          id: movie.id,
+          title: movie.title,
+          overview: movie.overview,
+          poster_path: movie.poster_path,
+          backdrop_path: movie.backdrop_path,
+          release_date: movie.release_date,
+          vote_average: movie.vote_average,
+          vote_count: movie.vote_count,
+          popularity: 0,
+          genre_ids: movie.genres.map((genre) => genre.id),
+        });
+      };
+            
 
 
     return(
@@ -120,8 +140,21 @@ export default function MovieDetailsHero({ movie,
                         Play Trailer
                     </Button>
 
-                    <Button variant="secondary">
-                        + Watchlist
+                    <Button
+                        variant="secondary"
+                        onClick={handleWatchlistToggle}
+                    >
+                        {isSaved ? (
+                            <>
+                                <Check size={18} />
+                                In Watchlist
+                            </>
+                        ) : (
+                            <>
+                                <Plus size={18} />
+                                Watchlist
+                            </>
+                        )}
                     </Button>
 
                 </div>
