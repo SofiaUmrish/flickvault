@@ -1,10 +1,12 @@
+"use client";
 import {Movie} from "@/lib/tmdb/types"
 import Image from "next/image"
 import getTmdbImageUrl from "@/utils/tmdb-image"
-import {Star} from "lucide-react"
 import Button from "../ui/Button"
 import Badge from "@/components/ui/Badge";
 import Link from "next/link"
+import { useWatchlistStore } from "@/store/watchlist";
+import { Check, Plus, Star } from "lucide-react";
 
 
 export default function MovieHero({ movie }: {movie: Movie}){
@@ -14,6 +16,9 @@ export default function MovieHero({ movie }: {movie: Movie}){
         ? new Date(movie.release_date).getFullYear()
         : null ;
 
+    const { toggleMovie, isInWatchlist } = useWatchlistStore();
+
+    const isSaved = isInWatchlist(movie.id);
     
     return(
 
@@ -57,8 +62,21 @@ export default function MovieHero({ movie }: {movie: Movie}){
                             href={`/movie/${movie.id}`}>
                                 View details
                         </Link>
-                        <Button variant="secondary">
-                            + Watchlist
+                        <Button
+                            variant="secondary"
+                            onClick={() => toggleMovie(movie)}
+                        >
+                            {isSaved ? (
+                                <>
+                                    <Check size={18} />
+                                    In Watchlist
+                                </>
+                            ) : (
+                                <>
+                                    <Plus size={18} />
+                                    Watchlist
+                                </>
+                            )}
                         </Button>
                     </div>
                 </div>

@@ -23,6 +23,10 @@ export interface Movie {
     name: string;
   }
 
+  export interface GenreListResponse {
+    genres: Genre[];
+  }
+
   export interface ProductionCompany {
     id: number;
     logo_path: string | null;

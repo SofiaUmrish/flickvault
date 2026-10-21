@@ -9,27 +9,27 @@ import { useQuery } from "@tanstack/react-query";
 export default function SearchContent() {
   
     const [query, setQuery] = useState("");
-  const debouncedQuery = useDebounce(query, 500);
+    const debouncedQuery = useDebounce(query, 500);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["search", debouncedQuery],
-    queryFn: async () => {
-      const res = await fetch(
-        `/api/search?query=${encodeURIComponent(debouncedQuery)}&page=1`
-      );
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["search", debouncedQuery],
+        queryFn: async () => {
+        const res = await fetch(
+            `/api/search?query=${encodeURIComponent(debouncedQuery)}&page=1`
+        );
 
-      if (!res.ok) {
-        throw new Error("Failed to fetch movies");
-      }
+        if (!res.ok) {
+            throw new Error("Failed to fetch movies");
+        }
 
-      return res.json();
-    },
-    enabled: Boolean(debouncedQuery.trim()),
-  });
+        return res.json();
+        },
+        enabled: Boolean(debouncedQuery.trim()),
+    });
 
-  const movies = data?.results ?? [];
-  const isWaitingForDebounce = query.trim() !== debouncedQuery.trim();
-  const isSearching = isWaitingForDebounce || isLoading;
+    const movies = data?.results ?? [];
+    const isWaitingForDebounce = query.trim() !== debouncedQuery.trim();
+    const isSearching = isWaitingForDebounce || isLoading;
 
   return (
 

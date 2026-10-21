@@ -21,37 +21,61 @@ export default function MovieCard({ movie }: {movie: Movie}){
     return(
 
         <article className="flex flex-col rounded-xl bg-surface border border-border transition-all duration-300 hover:scale-105 hover:shadow-accent/70 hover:shadow-[0px_0px_30px]">
-            <div className="group relative w-[250px] h-[350px] shrink-0 overflow-hidden rounded-t-xl">
-                {posterUrl ? ( 
-                    <Image 
-                    className="w-full h-full object-cover"
-                    src={posterUrl} 
-                    alt={movie.title} 
-                    width={250}
-                    height={350}
+            <div className="group relative h-[350px] w-[250px] shrink-0 overflow-hidden rounded-t-xl border-b border-border">
+                {posterUrl ? (
+                    <Image
+                        src={posterUrl}
+                        alt={movie.title}
+                        fill
+                        sizes="250px"
+                        className="object-cover"
                     />
                 ):(
-                    <div>
-                        <Film size={25} />
-                        <p>No poster</p>
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-b from-background to-sureface">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full border border-accent/20 bg-accent/10">
+                            <Film
+                                size={30}
+                                strokeWidth={1.3}
+                                className="text-accent/80"
+                            />
+                        </div>
+
+                        <div className="flex flex-col items-center gap-2">
+                            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-foreground/70">
+                                No poster
+                            </p>
+
+                            <span className="h-0.5 w-8 rounded-full bg-accent/70" />
+                        </div>
                     </div>
                 )}
 
-                <div 
-                    className="absolute inset-0 transition-colors group-hover:bg-background/60">
-                </div>
-
                 <button
-                    className="absolute flex items-center justify-center inset-0 transition-opacity opacity-0 group-hover:opacity-100 cursor-pointer"
-                    aria-label= {isInWatchlist(movie.id) ? "Remove from watchlist": "Add to watchlist" }
-                    onClick={()=>toggleMovie(movie)}
+                    type="button"
+                    className="
+                        absolute top-2 right-2 z-20
+                        flex items-center justify-center 
+                        w-10 h-10 rounded-full 
+                        bg-background/70 backdrop-blur-md border border-border/50
+                        transition-all duration-300
+                        hover:scale-110 hover:bg-background hover:border-accent
+                        opacity-100 lg:opacity-0 lg:group-hover:opacity-100
+                    "
+                    aria-label={isInWatchlist(movie.id) ? "Remove from watchlist" : "Add to watchlist"}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        toggleMovie(movie);
+                    }}
                 >
                     <Heart 
-                        className={isInWatchlist(movie.id) ? "text-accent fill-accent" : "text-accent"}
-                        size={50}
-                     />
+                        size={20} 
+                        className={`transition-colors ${
+                            isInWatchlist(movie.id) 
+                                ? "text-accent fill-accent" 
+                                : "text-foreground hover:text-accent"
+                        }`}
+                    />
                 </button>
-
             </div>
 
             <div className="my-4 w-[250px] flex-1 flex flex-col justify-between">
