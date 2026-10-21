@@ -69,7 +69,7 @@ export default function MovieDetailsHero({ movie,
 
                 {movie.tagline && (
                     <p className="text-xl text-muted italic font-medium">
-                        "{movie.tagline}"
+                        &quot;{movie.tagline}&quot;
                     </p>
                 )}
 

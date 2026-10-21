@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Film, House, Compass, Heart, Search, Moon, Sun} from "lucide-react";
+import { Film, House, Compass, Heart, Search} from "lucide-react";
 import MobileMenu from "@/components/layout/MobileMenu";
 import NavLink from "@/components/layout/NavLink";
 import ThemeToggle from "@/components/layout/ThemeToggle";

@@ -5,7 +5,6 @@ import type { Genre, GenreListResponse } from "@/lib/tmdb/types";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
 
 const SORT_OPTIONS = [
     { value: "popularity.desc", label: "Most popular" },

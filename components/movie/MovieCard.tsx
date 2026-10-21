@@ -31,7 +31,7 @@ export default function MovieCard({ movie }: {movie: Movie}){
                         className="object-cover"
                     />
                 ):(
-                    <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-b from-background to-sureface">
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-b from-background to-surface">
                         <div className="flex h-16 w-16 items-center justify-center rounded-full border border-accent/20 bg-accent/10">
                             <Film
                                 size={30}

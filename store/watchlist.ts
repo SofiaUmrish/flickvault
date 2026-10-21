@@ -42,8 +42,15 @@ export const useWatchlistStore = create<WatchlistState>()(
             
             toggleMovie: (newMovie) => {
 
-                get().isInWatchlist(newMovie.id) ?  get().removeMovie(newMovie.id) : get().addMovie(newMovie)
-            
+                if (get().isInWatchlist(newMovie.id)) {
+
+                    get().removeMovie(newMovie.id);
+
+                } else {
+
+                    get().addMovie(newMovie);
+                    
+                }  
             },
             
             isInWatchlist: (id) => {

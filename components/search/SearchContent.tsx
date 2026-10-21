@@ -1,7 +1,7 @@
 "use client";
 
 import useDebounce from "@/hooks/useDebounce";
-import { Search, Film, SearchX, AlertCircle } from "lucide-react";
+import { Search, SearchX, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import MovieGrid from "@/components/movie/MovieGrid";
 import { useQuery } from "@tanstack/react-query";
